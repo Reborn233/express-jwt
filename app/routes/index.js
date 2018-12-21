@@ -6,6 +6,14 @@ const ROOT = '/api'
 
 const controllers = require('../controllers')
 
+// test page
+
+router.get('/', function(req, res, next) {
+  res.render('index', {
+    title: '测试 websocket'
+  })
+})
+
 // 登录接口
 router.post(ROOT + '/login', controllers.login)
 // 需要登录才能请求的接口

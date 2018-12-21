@@ -87,5 +87,13 @@ th {
   -webkit-transform: rotate(-45deg);
           transform: rotate(-45deg);
 }
-
+#log{
+  width: 100%;
+  border: 1px solid #000;
+  height: 100px;
+  overflow: auto;
+  padding: 5px 10px;
+  color: red;
+  font-size: 12px;
+}
 

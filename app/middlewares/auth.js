@@ -6,7 +6,7 @@ module.exports = async (req, res, next) => {
     try {
       const result = await tools.verifyToken(token)
       res.$user = result
-      next()
+      await next()
     } catch (error) {
       res.json({
         code: CODE.ERROR,

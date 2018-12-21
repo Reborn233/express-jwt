@@ -6,6 +6,7 @@ const mock = require('../tools/mock')
 
 // 登录接口
 module.exports = async (req, res, next) => {
+  console.log(req.body)
   const { username, password } = req.body
   const $user = _.find(mock.users, o => o.username === username)
   if (!$user) {
