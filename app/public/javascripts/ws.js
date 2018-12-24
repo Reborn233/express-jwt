@@ -1,5 +1,5 @@
 if ('WebSocket' in window) {
-  var ws = new WebSocket('ws://localhost:3000/ws/websocket')
+  var ws = new WebSocket('ws://localhost:3000/ws')
 } else {
   alert('不支持 WebSocket')
 }
@@ -22,7 +22,7 @@ ws.onopen = function (msg) {
 
 ws.onmessage = function(evt) {
   var msg = evt.data
-  console.log('msg: ', msg)
+  log('接收msg: ' + msg)
 }
 
 ws.onclose = function() {
@@ -36,6 +36,6 @@ ws.onerror = function(err) {
 $btn.on('click', function(e) {
   var msg = $input.val()
   if (!msg) return false
-
+  log('发送msg: '+msg)
   ws.send(msg)
 })
