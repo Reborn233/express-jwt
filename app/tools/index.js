@@ -1,14 +1,15 @@
 const jwt = require('jsonwebtoken')
 const config = require('../config')
+const debug = require('debug')('api:server')
 module.exports = {
   verifyToken: token => {
     return new Promise((resolve, reject) => {
-      jwt.verify(token, config.secret,(err,decoded)=>{
-        if(err){
-          console.log('校验token失败')
+      jwt.verify(token, config.secret, (err, decoded) => {
+        if (err) {
+          debug('校验token失败')
           reject(err)
-        }else{
-          console.log('token 验证成功')
+        } else {
+          debug('token 验证成功')
           resolve(decoded)
         }
       })

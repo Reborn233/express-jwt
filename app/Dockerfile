@@ -22,4 +22,4 @@ COPY ./app.js /code/
 COPY ./config.js /code/
 
 EXPOSE 8080
-CMD [ "npm", "start" ]
+CMD ["npm", "start"]

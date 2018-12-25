@@ -1,30 +1,33 @@
 const express = require('express')
 const expressWS = require('express-ws')
+const debug = require('debug')('node-server:server')
 
 let wsRouter = null
 const WSRouter = (function() {
   function WSRouter(server) {
     this.server = null
     this.app = null
+    this.wsInstance = null
     this.clients = []
     this.server = server
     this.app = express()
 
-    expressWS(this.app, this.server)
+    this.wsInstance = expressWS(this.app, this.server)
   }
 
   WSRouter.prototype.lintenClientConnect = function() {
     let me = this
     this.app.ws('/ws', function(ws, req) {
-      console.log('client connect to server successful!')
+      debug('client connect to server successful!')
       me.clients.push(ws)
       ws.on('message', function(msg) {
-        console.log('receive client msg :', msg)
+        debug('receive client msg :', msg)
+        if (msg === 'HeartBeat') return
         me.receiveCmd(msg)
         me.sendCmd(msg, 1)
       })
       ws.on('close', function(msg) {
-        console.log('client is closed')
+        debug('client is closed')
         for (let i = 0; i < me.clients.length; i++) {
           if (me.clients[i] == this) {
             me.clients.splice(i, 1)
@@ -41,7 +44,7 @@ const WSRouter = (function() {
   }
 
   WSRouter.prototype.receiveCmd = function(cmd) {
-    console.log('接收消息: ', cmd)
+    debug('接收消息: ', cmd)
   }
 
   return WSRouter
